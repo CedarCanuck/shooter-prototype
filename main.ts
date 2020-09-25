@@ -10,7 +10,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        . . . . . . . f . . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -18,8 +19,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, bedi, 50, 50)
+        `, bedi, 70 * Math.sin(angle + 90), 70 * Math.cos(angle + 90))
     scene.cameraShake(2, 100)
     music.playTone(262, music.beat(BeatFraction.Eighth))
     if (goose.overlapsWith(projectile)) {
@@ -37,6 +37,8 @@ sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
 let projectile: Sprite = null
 let goose: Sprite = null
 let bedi: Sprite = null
+let angle = 0
+angle = 0
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -185,7 +187,6 @@ bedi = sprites.create(img`
     `, SpriteKind.Rotate)
 tiles.placeOnTile(bedi, tiles.getTileLocation(7, 8))
 scene.cameraFollowSprite(bedi)
-let angle = 0
 transformSprites.rotateSprite(bedi, angle)
 let positiveRotation = 10
 let negativeRotation = -10
