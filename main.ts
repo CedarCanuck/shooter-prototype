@@ -185,7 +185,8 @@ bedi = sprites.create(img`
     `, SpriteKind.Rotate)
 tiles.placeOnTile(bedi, tiles.getTileLocation(7, 8))
 scene.cameraFollowSprite(bedi)
-transformSprites.rotateSprite(bedi, 0)
+let angle = 0
+transformSprites.rotateSprite(bedi, angle)
 let positiveRotation = 10
 let negativeRotation = -10
 info.setLife(3)
@@ -214,10 +215,12 @@ if (bedi.overlapsWith(goose)) {
 forever(function () {
     if (controller.left.isPressed()) {
         transformSprites.changeRotation(bedi, negativeRotation)
+        angle += negativeRotation
         pause(19)
     }
     if (controller.right.isPressed()) {
         transformSprites.changeRotation(bedi, positiveRotation)
+        angle += positiveRotation
         pause(19)
     }
 })
