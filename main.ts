@@ -1,7 +1,7 @@
 namespace SpriteKind {
     export const Rotate = SpriteKind.create()
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -20,6 +20,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, bedi, 50, 50)
+    scene.cameraShake(2, 200)
     if (goose.overlapsWith(projectile)) {
         goose.destroy()
         projectile.destroy()
@@ -54,6 +55,8 @@ bedi = sprites.create(img`
     . . b b b f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Rotate)
+tiles.placeOnTile(bedi, tiles.getTileLocation(7, 8))
+scene.cameraFollowSprite(bedi)
 transformSprites.rotateSprite(bedi, 0)
 let positiveRotation = 10
 let negativeRotation = -10
@@ -89,4 +92,15 @@ forever(function () {
         transformSprites.changeRotation(bedi, positiveRotation)
         pause(15)
     }
+})
+forever(function () {
+    while (bedi.y <= 180) {
+        pause(30)
+        bedi.y += 1
+    }
+})
+forever(function () {
+    pause(100)
+    effects.blizzard.startScreenEffect(30)
+    pause(100)
 })
