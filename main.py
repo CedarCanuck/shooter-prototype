@@ -3,7 +3,38 @@ class SpriteKind:
     Rotate = SpriteKind.create()
 
 def on_b_pressed():
-    global projectile
+    global bulletAngle, vx, vy, projectile, bulletExists
+    if angle < 0:
+        bulletAngle = 360 - angle % 360
+    else:
+        bulletAngle = angle % 360
+    if bulletAngle == 0:
+        vx = 0
+        vy = -50
+    elif bulletAngle > 0 and bulletAngle <= 45:
+        vx = 25
+        vy = -50
+    elif bulletAngle > 45 and bulletAngle <= 90:
+        vx = 50
+        vy = -25
+    elif bulletAngle > 90 and bulletAngle <= 135:
+        vx = 50
+        vy = 25
+    elif bulletAngle > 135 and bulletAngle <= 180:
+        vx = 25
+        vy = 50
+    elif bulletAngle > 180 and bulletAngle <= 225:
+        vx = -25
+        vy = 50
+    elif bulletAngle > 225 and bulletAngle <= 270:
+        vx = -50
+        vy = 25
+    elif bulletAngle > 270 and bulletAngle <= 315:
+        vx = -50
+        vy = -25
+    else:
+        vx = -25
+        vy = -50
     projectile = sprites.create_projectile_from_sprite(img("""
             . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
@@ -23,29 +54,28 @@ def on_b_pressed():
                     . . . . . . . . . . . . . . . .
         """),
         bedi,
-        70 * Math.sin(angle - 90),
-        70 * Math.cos(angle - 90))
+        vx,
+        vy)
     scene.camera_shake(2, 100)
     music.play_tone(262, music.beat(BeatFraction.EIGHTH))
-    if goose.overlaps_with(projectile):
-        goose.destroy()
-        projectile.destroy()
-        music.ba_ding.play()
+    bulletExists = True
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
 def on_life_zero():
+    music.wawawawaa.play()
     game.show_long_text("You Died!", DialogLayout.BOTTOM)
 info.on_life_zero(on_life_zero)
 
-def on_on_destroyed(sprite):
-    info.change_score_by(10)
-sprites.on_destroyed(SpriteKind.enemy, on_on_destroyed)
-
-projectile: Sprite = None
 goose: Sprite = None
+gooseExists = False
+bulletExists = False
+projectile: Sprite = None
+vy = 0
+vx = 0
+bulletAngle = 0
 bedi: Sprite = None
 angle = 0
-angle = 0
+angle = 90
 scene.set_background_image(img("""
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -169,7 +199,7 @@ scene.set_background_image(img("""
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 """))
 effects.confetti.start_screen_effect(4000)
-for index in range(4):
+for index in range(1):
     music.play_melody("A F E F D G E F ", 360)
 pause(200)
 tiles.set_tilemap(tilemap("""
@@ -196,34 +226,64 @@ bedi = sprites.create(img("""
     SpriteKind.Rotate)
 tiles.place_on_tile(bedi, tiles.get_tile_location(7, 8))
 scene.camera_follow_sprite(bedi)
-transformSprites.rotate_sprite(bedi, angle)
+transformSprites.rotate_sprite(bedi, 0)
 positiveRotation = 10
 negativeRotation = -10
+difficulty = 20
 info.set_life(3)
-goose = sprites.create(img("""
-        . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . .
-    """),
-    SpriteKind.enemy)
-goose.follow(bedi)
-if bedi.overlaps_with(goose):
-    info.change_life_by(-1)
 
 def on_forever():
+    global goose, gooseExists, difficulty
+    if not (gooseExists):
+        goose = sprites.create(img("""
+
+ . . f f . . . . . . . . .
+
+ . f 1 f . . . . . . . . .
+
+ f f 1 f . . . . . . . . .
+
+ . . . f . . . . . . . . .
+
+ . . . f . . . . . . . . .
+
+ . . . f . . . . . . . . .
+
+ . . . f . . . . . . . . .
+
+ . . . 1 e e e e . . . . .
+
+ . . 1 1 e e e e e e . . .
+
+ . . 1 1 1 e e e e e e . .
+
+ . . d d 1 1 1 1 1 e e e e
+
+ . . . d d d 1 1 1 1 d e e
+
+ . . . . d d d d d d . . .
+
+ . . . . . . f . . . . . .
+
+ . . . . . . f . . . . . .
+
+ . . . . . f f . . . . . .
+
+ 
+            """),
+            SpriteKind.enemy)
+        tiles.place_on_random_tile(goose, sprites.castle.tile_grass1)
+        goose.follow(bedi, difficulty)
+        gooseExists = True
+        difficulty = difficulty + 1
+    if bedi.overlaps_with(goose):
+        info.change_life_by(-1)
+        music.power_down.play()
+        goose.destroy()
+        gooseExists = False
+forever(on_forever)
+
+def on_forever2():
     global angle
     if controller.left.is_pressed():
         transformSprites.change_rotation(bedi, negativeRotation)
@@ -233,12 +293,6 @@ def on_forever():
         transformSprites.change_rotation(bedi, positiveRotation)
         angle += positiveRotation
         pause(19)
-forever(on_forever)
-
-def on_forever2():
-    pause(100)
-    effects.blizzard.start_screen_effect(30)
-    pause(100)
 forever(on_forever2)
 
 def on_forever3():
@@ -249,3 +303,20 @@ def on_forever3():
         pause(30)
         bedi.y += -1
 forever(on_forever3)
+
+def on_forever4():
+    global gooseExists
+    if bulletExists:
+        if goose.overlaps_with(projectile):
+            goose.destroy()
+            projectile.destroy()
+            music.ba_ding.play()
+            info.change_score_by(10)
+            gooseExists = False
+forever(on_forever4)
+
+def on_forever5():
+    pause(100)
+    effects.blizzard.start_screen_effect(30)
+    pause(100)
+forever(on_forever5)

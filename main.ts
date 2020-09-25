@@ -61,8 +61,8 @@ info.onLifeZero(function () {
     music.wawawawaa.play()
     game.showLongText("You Died!", DialogLayout.Bottom)
 })
-let goose: Sprite = null
 let gooseExists = false
+let goose: Sprite = null
 let bulletExists = false
 let projectile: Sprite = null
 let vy = 0
@@ -225,50 +225,6 @@ let negativeRotation = -10
 let difficulty = 20
 info.setLife(3)
 forever(function () {
-    if (!(gooseExists)) {
-        goose = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . b 5 b . . . 
-            . . . . . . . . . b 5 b . . . . 
-            . . . . . . b b b b b b . . . . 
-            . . . . . b b 5 5 5 5 5 b . . . 
-            . b b b b b 5 5 5 5 5 5 5 b . . 
-            . b d 5 b 5 5 5 5 5 5 5 5 b . . 
-            . . b 5 5 b 5 d 1 f 5 d 4 f . . 
-            . . b d 5 5 b 1 f f 5 4 4 c . . 
-            b b d b 5 5 5 d f b 4 4 4 4 4 b 
-            b d d c d 5 5 b 5 4 4 4 4 4 b . 
-            c d d d c c b 5 5 5 5 5 5 5 b . 
-            c b d d d d d 5 5 5 5 5 5 5 b . 
-            . c d d d d d d 5 5 5 5 5 d b . 
-            . . c b d d d d d 5 5 5 b b . . 
-            . . . c c c c c c c c b b . . . 
-            `, SpriteKind.Enemy)
-        tiles.placeOnRandomTile(goose, sprites.castle.tileGrass1)
-        goose.follow(bedi, difficulty)
-        gooseExists = true
-        difficulty = difficulty + 1
-    }
-    if (bedi.overlapsWith(goose)) {
-        info.changeLifeBy(-1)
-        music.powerDown.play()
-        goose.destroy()
-        gooseExists = false
-    }
-})
-forever(function () {
-    if (controller.left.isPressed()) {
-        transformSprites.changeRotation(bedi, negativeRotation)
-        angle += negativeRotation
-        pause(19)
-    }
-    if (controller.right.isPressed()) {
-        transformSprites.changeRotation(bedi, positiveRotation)
-        angle += positiveRotation
-        pause(19)
-    }
-})
-forever(function () {
     while (bedi.y <= 180) {
         pause(30)
         bedi.y += 1
@@ -293,4 +249,48 @@ forever(function () {
     pause(100)
     effects.blizzard.startScreenEffect(30)
     pause(100)
+})
+forever(function () {
+    if (!(gooseExists)) {
+        goose = sprites.create(img`
+            . . f f . . . . . . . . . 
+            . f 1 f . . . . . . . . . 
+            f f 1 f . . . . . . . . . 
+            . . . f . . . . . . . . . 
+            . . . f . . . . . . . . . 
+            . . . f . . . . . . . . . 
+            . . . f . . . . . . . . . 
+            . . . 1 e e e e . . . . . 
+            . . 1 1 e e e e e e . . . 
+            . . 1 1 1 e e e e e e . . 
+            . . d d 1 1 1 1 1 e e e e 
+            . . . d d d 1 1 1 1 d e e 
+            . . . . d d d d d d . . . 
+            . . . . . . f . . . . . . 
+            . . . . . . f . . . . . . 
+            . . . . . f f . . . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnRandomTile(goose, sprites.castle.tileGrass1)
+        goose.follow(bedi, difficulty)
+        gooseExists = true
+        difficulty = difficulty + 1
+    }
+    if (bedi.overlapsWith(goose)) {
+        info.changeLifeBy(-1)
+        music.powerDown.play()
+        goose.destroy()
+        gooseExists = false
+    }
+})
+forever(function () {
+    if (controller.left.isPressed()) {
+        transformSprites.changeRotation(bedi, negativeRotation)
+        angle += negativeRotation
+        pause(19)
+    }
+    if (controller.right.isPressed()) {
+        transformSprites.changeRotation(bedi, positiveRotation)
+        angle += positiveRotation
+        pause(19)
+    }
 })
