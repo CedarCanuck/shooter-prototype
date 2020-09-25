@@ -20,7 +20,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, bedi, 50, 50)
-    scene.cameraShake(2, 200)
+    scene.cameraShake(2, 100)
     if (goose.overlapsWith(projectile)) {
         goose.destroy()
         projectile.destroy()
