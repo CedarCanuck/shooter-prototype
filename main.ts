@@ -22,11 +22,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         `, bedi, 70 * Math.sin(angle + 90), 70 * Math.cos(angle + 90))
     scene.cameraShake(2, 100)
     music.playTone(262, music.beat(BeatFraction.Eighth))
-    if (goose.overlapsWith(projectile)) {
-        goose.destroy()
-        projectile.destroy()
-        music.baDing.play()
-    }
+    bulletExists = true
 })
 info.onLifeZero(function () {
     game.showLongText("You Died!", DialogLayout.Bottom)
@@ -34,8 +30,10 @@ info.onLifeZero(function () {
 sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
     info.changeScoreBy(10)
 })
-let projectile: Sprite = null
 let goose: Sprite = null
+let gooseExists = false
+let bulletExists = false
+let projectile: Sprite = null
 let bedi: Sprite = null
 let angle = 0
 angle = 0
@@ -162,7 +160,7 @@ scene.setBackgroundImage(img`
     dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     `)
 effects.confetti.startScreenEffect(4000)
-for (let index = 0; index < 4; index++) {
+for (let index = 0; index < 1; index++) {
     music.playMelody("A F E F D G E F ", 360)
 }
 pause(200)
@@ -191,28 +189,41 @@ transformSprites.rotateSprite(bedi, angle)
 let positiveRotation = 10
 let negativeRotation = -10
 info.setLife(3)
-goose = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Enemy)
-goose.follow(bedi)
-if (bedi.overlapsWith(goose)) {
-    info.changeLifeBy(-1)
-}
+forever(function () {
+    if (!(gooseExists)) {
+        goose = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . b 5 b . . . 
+            . . . . . . . . . b 5 b . . . . 
+            . . . . . . b b b b b b . . . . 
+            . . . . . b b 5 5 5 5 5 b . . . 
+            . b b b b b 5 5 5 5 5 5 5 b . . 
+            . b d 5 b 5 5 5 5 5 5 5 5 b . . 
+            . . b 5 5 b 5 d 1 f 5 d 4 f . . 
+            . . b d 5 5 b 1 f f 5 4 4 c . . 
+            b b d b 5 5 5 d f b 4 4 4 4 4 b 
+            b d d c d 5 5 b 5 4 4 4 4 4 b . 
+            c d d d c c b 5 5 5 5 5 5 5 b . 
+            c b d d d d d 5 5 5 5 5 5 5 b . 
+            . c d d d d d d 5 5 5 5 5 d b . 
+            . . c b d d d d d 5 5 5 b b . . 
+            . . . c c c c c c c c b b . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnRandomTile(goose, sprites.castle.tileGrass1)
+        goose.follow(bedi, 20)
+        gooseExists = true
+    }
+    if (bedi.overlapsWith(goose)) {
+        info.changeLifeBy(-1)
+        goose.destroy()
+        gooseExists = false
+    }
+})
+forever(function () {
+    pause(100)
+    effects.blizzard.startScreenEffect(30)
+    pause(100)
+})
 forever(function () {
     if (controller.left.isPressed()) {
         transformSprites.changeRotation(bedi, negativeRotation)
@@ -226,11 +237,6 @@ forever(function () {
     }
 })
 forever(function () {
-    pause(100)
-    effects.blizzard.startScreenEffect(30)
-    pause(100)
-})
-forever(function () {
     while (bedi.y <= 180) {
         pause(30)
         bedi.y += 1
@@ -238,5 +244,15 @@ forever(function () {
     while (bedi.y > 75) {
         pause(30)
         bedi.y += -1
+    }
+})
+forever(function () {
+    if (bulletExists) {
+        if (goose.overlapsWith(projectile)) {
+            goose.destroy()
+            projectile.destroy()
+            music.baDing.play()
+            gooseExists = false
+        }
     }
 })
