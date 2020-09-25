@@ -27,9 +27,6 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 info.onLifeZero(function () {
     game.showLongText("You Died!", DialogLayout.Bottom)
 })
-sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
-    info.changeScoreBy(10)
-})
 let goose: Sprite = null
 let gooseExists = false
 let bulletExists = false
@@ -252,6 +249,7 @@ forever(function () {
             goose.destroy()
             projectile.destroy()
             music.baDing.play()
+            info.changeScoreBy(10)
             gooseExists = false
         }
     }
