@@ -44,7 +44,7 @@ bedi = sprites.create(img`
     . . f e e d f e e d f e e f . . 
     . . f e e d f e e d f e e f . . 
     . . f e e e e e e e e e e f . . 
-    . . f f e e f f f f e e f f . . 
+    . . f f e e d d d d e e f f . . 
     . . f f f f d e e d f f f f . . 
     . . . f d d d d d d d d f . . . 
     . . . . b b b b b b b b . . . . 
