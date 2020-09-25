@@ -186,6 +186,7 @@ scene.cameraFollowSprite(bedi)
 transformSprites.rotateSprite(bedi, angle)
 let positiveRotation = 10
 let negativeRotation = -10
+let difficulty = 20
 info.setLife(3)
 forever(function () {
     if (!(gooseExists)) {
@@ -208,8 +209,9 @@ forever(function () {
             . . . c c c c c c c c b b . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(goose, sprites.castle.tileGrass1)
-        goose.follow(bedi, 20)
+        goose.follow(bedi, difficulty)
         gooseExists = true
+        difficulty = difficulty + 1
     }
     if (bedi.overlapsWith(goose)) {
         info.changeLifeBy(-1)
