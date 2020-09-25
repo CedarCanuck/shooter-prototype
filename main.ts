@@ -2,6 +2,39 @@ namespace SpriteKind {
     export const Rotate = SpriteKind.create()
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (angle < 0) {
+        bulletAngle = 360 - angle % 360
+    } else {
+        bulletAngle = angle % 360
+    }
+    if (bulletAngle == 0) {
+        vx = 0
+        vy = -50
+    } else if (bulletAngle > 0 && bulletAngle <= 45) {
+        vx = 25
+        vy = -50
+    } else if (bulletAngle > 45 && bulletAngle <= 90) {
+        vx = 50
+        vy = -25
+    } else if (bulletAngle > 90 && bulletAngle <= 135) {
+        vx = 50
+        vy = 25
+    } else if (bulletAngle > 135 && bulletAngle <= 180) {
+        vx = 25
+        vy = 50
+    } else if (bulletAngle > 180 && bulletAngle <= 225) {
+        vx = -25
+        vy = 50
+    } else if (bulletAngle > 225 && bulletAngle <= 270) {
+        vx = -50
+        vy = 25
+    } else if (bulletAngle > 270 && bulletAngle <= 315) {
+        vx = -50
+        vy = -25
+    } else {
+        vx = -25
+        vy = -50
+    }
     projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -19,21 +52,25 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, bedi, 70 * Math.sin(angle + 90), 70 * Math.cos(angle + 90))
+        `, bedi, vx, vy)
     scene.cameraShake(2, 100)
     music.playTone(262, music.beat(BeatFraction.Eighth))
     bulletExists = true
 })
 info.onLifeZero(function () {
+    music.wawawawaa.play()
     game.showLongText("You Died!", DialogLayout.Bottom)
 })
 let goose: Sprite = null
 let gooseExists = false
 let bulletExists = false
 let projectile: Sprite = null
+let vy = 0
+let vx = 0
+let bulletAngle = 0
 let bedi: Sprite = null
 let angle = 0
-angle = 0
+angle = 90
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -182,9 +219,10 @@ bedi = sprites.create(img`
     `, SpriteKind.Rotate)
 tiles.placeOnTile(bedi, tiles.getTileLocation(7, 8))
 scene.cameraFollowSprite(bedi)
-transformSprites.rotateSprite(bedi, angle)
+transformSprites.rotateSprite(bedi, 0)
 let positiveRotation = 10
 let negativeRotation = -10
+let difficulty = 20
 info.setLife(3)
 forever(function () {
     if (!(gooseExists)) {
@@ -207,19 +245,16 @@ forever(function () {
             . . . c c c c c c c c b b . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(goose, sprites.castle.tileGrass1)
-        goose.follow(bedi, 20)
+        goose.follow(bedi, difficulty)
         gooseExists = true
+        difficulty = difficulty + 1
     }
     if (bedi.overlapsWith(goose)) {
         info.changeLifeBy(-1)
+        music.powerDown.play()
         goose.destroy()
         gooseExists = false
     }
-})
-forever(function () {
-    pause(100)
-    effects.blizzard.startScreenEffect(30)
-    pause(100)
 })
 forever(function () {
     if (controller.left.isPressed()) {
@@ -253,4 +288,9 @@ forever(function () {
             gooseExists = false
         }
     }
+})
+forever(function () {
+    pause(100)
+    effects.blizzard.startScreenEffect(30)
+    pause(100)
 })
