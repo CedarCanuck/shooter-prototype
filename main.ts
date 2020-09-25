@@ -21,6 +21,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         `, bedi, 50, 50)
     scene.cameraShake(2, 100)
+    music.playTone(262, music.beat(BeatFraction.Eighth))
     if (goose.overlapsWith(projectile)) {
         goose.destroy()
         projectile.destroy()
@@ -84,16 +85,6 @@ if (bedi.overlapsWith(goose)) {
     info.changeLifeBy(-1)
 }
 forever(function () {
-    while (bedi.y <= 180) {
-        pause(30)
-        bedi.y += 1
-    }
-    while (bedi.y > 75) {
-        pause(30)
-        bedi.y += -1
-    }
-})
-forever(function () {
     if (controller.left.isPressed()) {
         transformSprites.changeRotation(bedi, negativeRotation)
         pause(19)
@@ -101,6 +92,16 @@ forever(function () {
     if (controller.right.isPressed()) {
         transformSprites.changeRotation(bedi, positiveRotation)
         pause(19)
+    }
+})
+forever(function () {
+    while (bedi.y <= 180) {
+        pause(30)
+        bedi.y += 1
+    }
+    while (bedi.y > 75) {
+        pause(30)
+        bedi.y += -1
     }
 })
 forever(function () {
