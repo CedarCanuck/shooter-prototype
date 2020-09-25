@@ -38,15 +38,15 @@ let mySprite = sprites.create(img`
     . . . . . . . 8 8 8 . . . . . . 
     `, SpriteKind.Rotate)
 transformSprites.rotateSprite(mySprite, 0)
-let positiveRotation = 20
-let negativeRotation = -20
+let positiveRotation = 10
+let negativeRotation = -10
 forever(function () {
     if (controller.left.isPressed()) {
         transformSprites.changeRotation(mySprite, negativeRotation)
-        pause(100)
+        pause(15)
     }
     if (controller.right.isPressed()) {
         transformSprites.changeRotation(mySprite, positiveRotation)
-        pause(100)
+        pause(15)
     }
 })
