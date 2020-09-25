@@ -2,11 +2,6 @@ namespace SpriteKind {
     export const Rotate = SpriteKind.create()
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (angle < 0) {
-        bulletAngle = 360 - angle % 360
-    } else {
-        bulletAngle = angle % 360
-    }
     if (bulletAngle == 0) {
         vx = 0
         vy = -50
@@ -69,8 +64,7 @@ let vy = 0
 let vx = 0
 let bulletAngle = 0
 let bedi: Sprite = null
-let angle = 0
-angle = 90
+let angle = 90
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -224,6 +218,20 @@ let positiveRotation = 10
 let negativeRotation = -10
 let difficulty = 20
 info.setLife(3)
+forever(function () {
+    if (angle == -360) {
+        angle = 0
+    }
+    if (angle == 360) {
+        angle = 0
+    }
+    if (angle >= 0) {
+        bulletAngle = angle
+    }
+    if (angle < 0) {
+        bulletAngle = 360 + angle
+    }
+})
 forever(function () {
     while (bedi.y <= 180) {
         pause(30)
