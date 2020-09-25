@@ -84,16 +84,6 @@ if (bedi.overlapsWith(goose)) {
     info.changeLifeBy(-1)
 }
 forever(function () {
-    if (controller.left.isPressed()) {
-        transformSprites.changeRotation(bedi, negativeRotation)
-        pause(15)
-    }
-    if (controller.right.isPressed()) {
-        transformSprites.changeRotation(bedi, positiveRotation)
-        pause(15)
-    }
-})
-forever(function () {
     while (bedi.y <= 180) {
         pause(30)
         bedi.y += 1
@@ -101,6 +91,16 @@ forever(function () {
     while (bedi.y > 75) {
         pause(30)
         bedi.y += -1
+    }
+})
+forever(function () {
+    if (controller.left.isPressed()) {
+        transformSprites.changeRotation(bedi, negativeRotation)
+        pause(19)
+    }
+    if (controller.right.isPressed()) {
+        transformSprites.changeRotation(bedi, positiveRotation)
+        pause(19)
     }
 })
 forever(function () {
