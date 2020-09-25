@@ -98,6 +98,10 @@ forever(function () {
         pause(30)
         bedi.y += 1
     }
+    while (bedi.y > 75) {
+        pause(30)
+        bedi.y += -1
+    }
 })
 forever(function () {
     pause(100)
