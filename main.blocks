@@ -1,35 +1,18 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable type="KIND_SpriteKind" id="UajPQ9[OGWZRo}~2IK5~">Player</variable><variable type="KIND_SpriteKind" id="j;*kPz8fHHJ$xkV4OvXd">Projectile</variable><variable type="KIND_SpriteKind" id="cnM0Yb[wxc5$A$c#pHP=">Food</variable><variable type="KIND_SpriteKind" id="ldkN1n1BAXt,@-LTj[Di">Enemy</variable><variable type="KIND_SpriteKind" id="^N:!hWx/E;+30S-R_~Fn">Rotate</variable><variable id="zaikNtnDxk%iMzTbcc6y">mySprite</variable><variable id="Z]KPL2t#ij93MZ%S-x-2">negativeRotation</variable><variable id="hp!Zj@,-=h--iY^.:|bc">positiveRotation</variable></variables><block type="pxt-on-start" id="M].4+xzWi%ph$Hr=M.vD" x="0" y="0"><statement name="HANDLER"><block type="tilemap_editor" id="e@!Wo,sFG@JiUt~$+=wV"><field name="tilemap">tiles.createTilemap(hex`1000100001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101020202020101010101010101010101020202020202010101010101010101020202020202020201010101010101010202020202020202010101010101010102020202020202020101010101010101020202020202020201010101010101010102020202020201010101010101010101010202020201010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.dungeon.darkGroundNorthWest1,myTiles.tile1], TileScale.Sixteen)</field><next><block type="variables_set" id="Dn%H%[jp{AMqTMpvDW8^"><field name="VAR" id="zaikNtnDxk%iMzTbcc6y">mySprite</field><value name="VALUE"><shadow xmlns="http://www.w3.org/1999/xhtml" type="math_number"><field name="NUM">0</field></shadow><block type="spritescreate" id="cso;kxR}d8E8JV5,4;IH"><value name="img"><shadow type="screen_image_picker" id="ZRhgzT{XP5Z|;/kyuyv="><field name="img">img`
-. . . . . . . . 8 . . . . . . . 
-. . . . . . . 8 8 8 . . . . . . 
-. . . . . . . 8 f 8 . . . . . . 
-. . . . . . . 8 f 8 . . . . . . 
-. . . . . 8 8 f f f 8 8 . . . . 
-. . . . 8 f f f f f f f 8 . . . 
-. . . 8 f f f f f f f f f 8 . . 
-. . . 8 f 6 6 6 6 6 6 6 f 8 . . 
-. . 8 f f f f f 6 f f f f f 8 . 
-. . 8 f f f f f 6 f f f f f 8 . 
-. . 8 f f f f f 6 f f f f f 8 . 
-. . . 8 f f f f 6 f f f f 8 . . 
-. . . 8 f f f f 6 f f f f 8 . . 
-. . . . 8 f f f 6 f f f 8 . . . 
-. . . . . 8 8 f f f 8 8 . . . . 
-. . . . . . . 8 8 8 . . . . . . 
-`</field></shadow></value><value name="kind"><shadow type="spritekind" id="wM,lO|E[[*0z]_YXpiI2"><field name="MEMBER">Rotate</field></shadow></value></block></value><next><block type="transform_rotate_sprite" id="4dtH#3#t`l^m*.95tvX5"><value name="sprite"><block type="variables_get" id="pAO4*Zl~AcoT68MZINHf"><field name="VAR" id="zaikNtnDxk%iMzTbcc6y">mySprite</field></block></value><value name="angle"><shadow type="math_number" id="mTX^Eb]MdH.?5,KeaRu?"><field name="NUM">0</field></shadow></value><next><block type="variables_set" id="y45aVkGM{N](*sTM8}vS"><field name="VAR" id="hp!Zj@,-=h--iY^.:|bc">positiveRotation</field><value name="VALUE"><shadow type="math_number" id="3(E-=.):c?W}-=d{h%16"><field name="NUM">10</field></shadow></value><next><block type="variables_set" id="x-UYd*aMj]O2?S|Qt}e]"><field name="VAR" id="Z]KPL2t#ij93MZ%S-x-2">negativeRotation</field><value name="VALUE"><shadow type="math_number" id="24Pjri:.LtKa;G5cEQnR"><field name="NUM">-10</field></shadow></value></block></next></block></next></block></next></block></next></block></statement></block><block type="forever" id="#0/e5gB(vQ?jfQDE278|" x="10" y="390"><statement name="HANDLER"><block type="controls_if" id="ej2)J_+;f|`96?G~qqRd"><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="keyispressed" id="6szwZjg(/~/q#WWB*30;"><field name="button">controller.left</field></block></value><statement name="DO0"><block type="transform_change_rotation" id="kBK-[KhbRbpWef$P_jG6"><value name="sprite"><block type="variables_get" id="U6h,!:vcYbXR6RSPJ|Df"><field name="VAR" id="zaikNtnDxk%iMzTbcc6y">mySprite</field></block></value><value name="angleChange"><shadow type="math_number"><field name="NUM">-25</field></shadow><block type="variables_get" id="s7yoFbm|Yq3mM|%%#7v~"><field name="VAR" id="Z]KPL2t#ij93MZ%S-x-2">negativeRotation</field></block></value><next><block type="device_pause" id="8+8SrFDqq*i0ac$G8rqa"><value name="pause"><shadow type="timePicker" id="Mq;UwgS({7$tsc71V0S]"><field name="ms">15</field></shadow></value></block></next></block></statement><next><block type="controls_if" id=",=N*BAV];WE[e76W~z~G"><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="keyispressed" id="/i58SggNAX.iFr_/ynkI"><field name="button">controller.right</field></block></value><statement name="DO0"><block type="transform_change_rotation" id="b%|bE$=G*Bp2x/~R}-i6"><value name="sprite"><block type="variables_get" id="/czYGg`{@%DgKcLm(?-x"><field name="VAR" id="zaikNtnDxk%iMzTbcc6y">mySprite</field></block></value><value name="angleChange"><shadow type="math_number"><field name="NUM">25</field></shadow><block type="variables_get" id=",sP7cR4DV7?WEPE?m!cK"><field name="VAR" id="hp!Zj@,-=h--iY^.:|bc">positiveRotation</field></block></value><next><block type="device_pause" id="G6@O19k%4{mOUr-9@j1J"><value name="pause"><shadow type="timePicker" id="grj-3},0#[:g2jjEWMZt"><field name="ms">15</field></shadow></value></block></next></block></statement></block></next></block></statement></block></xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="BJ({L,f^Rs-`OSom|#q0">mySprite</variable><variable id="TB:Ub?JZHvU+[y^R?RMU">negativeRotation</variable><variable id="tx8a3`UfV13Mm!!Vd+K9">positiveRotation</variable><variable type="KIND_SpriteKind" id="]/;W53Qh)PIa-`;$g~M7">Rotate</variable><variable type="KIND_SpriteKind" id="$V)-|j(A2yomW.2w9Z;9">Player</variable><variable type="KIND_SpriteKind" id=".D/.7moxz:d5{3(c-SV~">Projectile</variable><variable type="KIND_SpriteKind" id="Sry5zMs,-:p:4YxYj~5r">Food</variable><variable type="KIND_SpriteKind" id="AI^_X`.%fz8?oN9Z1GPs">Enemy</variable></variables><block type="pxt-on-start" id="xRRgvHNlG#rZ^u`HECiY" x="0" y="0"><statement name="HANDLER"><block type="tilemap_editor" id="jO@I@5d{j.~n-d,;qEul"><field name="tilemap">tilemap`level_0`</field><next><block type="variables_set" id="|Jg4F*Q_{[K8-lQlKd/a"><field name="VAR" id="BJ({L,f^Rs-`OSom|#q0">mySprite</field><value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="spritescreate" id=")Wz*Yubt44cPk~wKye^K"><value name="img"><shadow type="screen_image_picker" id="Np](Q]?}X:W)i]M8P}G!"><field name="img">img`
+. . . . . f f f f f f . . . . . 
+. . . f f f f f f f f f f . . . 
+. . . f f f e e e e f f f . . . 
+. . f f e e e e e e e e f f . . 
+. . f e e d f e e d f e e f . . 
+. . f e e d f e e d f e e f . . 
+. . f e e e e e e e e e e f . . 
+. . f f e e f f f f e e f f . . 
+. . f f f f d e e d f f f f . . 
+. . . f d d d d d d d d f . . . 
+. . . . b b b b b b b b . . . . 
+. . b e e f f f e e e f f f f f 
+. . b e e e e b b b b b b b . . 
+. . b e e b b b b b b b b b . . 
+. . b b b f f f f f f . . . . . 
+. . . . . f f . . f f . . . . . 
+`</field></shadow></value><value name="kind"><shadow type="spritekind" id="ZLAHDxcW%Y^u0LV=0Lii"><field name="MEMBER">Rotate</field></shadow></value></block></value><next><block type="transform_rotate_sprite" id="}[*awcqTD+C6E#(-^$Vi"><value name="sprite"><shadow type="variables_get" id="v5TYpfib~g_-9kwL{Els"><field name="VAR" id="BJ({L,f^Rs-`OSom|#q0">mySprite</field></shadow></value><value name="angle"><shadow type="math_number" id="yDINzH_9d]ubW$%;dt10"><field name="NUM">0</field></shadow></value><next><block type="variables_set" id="adX:BS!Paisxi/0m{cD8"><field name="VAR" id="tx8a3`UfV13Mm!!Vd+K9">positiveRotation</field><value name="VALUE"><shadow type="math_number" id="EO:kQaqCofd@kI(;vHX$"><field name="NUM">10</field></shadow></value><next><block type="variables_set" id="_K#wpY#5(sj5H3$HeQ,z"><field name="VAR" id="TB:Ub?JZHvU+[y^R?RMU">negativeRotation</field><value name="VALUE"><shadow type="math_number" id="RLvlCW9JHES)#K]ar%G+"><field name="NUM">-10</field></shadow></value></block></next></block></next></block></next></block></next></block></statement></block><block type="forever" id="7Sll9d|qnSnM=BD[2WG:" x="634" y="0"><statement name="HANDLER"><block type="controls_if" id="R9JgB5LEC!,e]?DCIW~N"><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="keyispressed" id="oGPwB,.qm|{d,W7,glPv"><field name="button">controller.left</field></block></value><statement name="DO0"><block type="transform_change_rotation" id="X?IbFG1um:HnlwbAK;zr"><value name="sprite"><shadow type="variables_get" id="N(Q2]O:]mTA/cc8VP~($"><field name="VAR" id="BJ({L,f^Rs-`OSom|#q0">mySprite</field></shadow></value><value name="angleChange"><block type="variables_get" id="4UcDW9,k!1GP|q?+FI[_"><field name="VAR" id="TB:Ub?JZHvU+[y^R?RMU">negativeRotation</field></block></value><next><block type="device_pause" id="6[05qNX~.}$U}TsSyJd;"><value name="pause"><shadow type="timePicker" id="bI.Tr3bp]=|M:JxsXWUy"><field name="ms">15</field></shadow></value></block></next></block></statement><next><block type="controls_if" id="K2SOEs3n:v:Ifg^!Nh-Y"><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="keyispressed" id="F]yE}m=p6NqfX8SM%*#J"><field name="button">controller.right</field></block></value><statement name="DO0"><block type="transform_change_rotation" id="`7g$*?5Hn{,[q[S[2.%t"><value name="sprite"><shadow type="variables_get" id="]caJg#53tyl0LqTAxWQj"><field name="VAR" id="BJ({L,f^Rs-`OSom|#q0">mySprite</field></shadow></value><value name="angleChange"><block type="variables_get" id="9Wa.WWa6sO^l]#HNLiXM"><field name="VAR" id="tx8a3`UfV13Mm!!Vd+K9">positiveRotation</field></block></value><next><block type="device_pause" id="BV^#TKe]WG1:N]JG6Cx:"><value name="pause"><shadow type="timePicker" id="a8qn46[(;o#H|`L]wMA_"><field name="ms">15</field></shadow></value></block></next></block></statement></block></next></block></statement></block></xml>

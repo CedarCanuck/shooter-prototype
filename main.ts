@@ -1,41 +1,24 @@
 namespace SpriteKind {
     export const Rotate = SpriteKind.create()
 }
-tiles.setTilemap(tiles.createTilemap(hex`1000100001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101020202020101010101010101010101020202020202010101010101010101020202020202020201010101010101010202020202020202010101010101010102020202020202020101010101010101020202020202020201010101010101010102020202020201010101010101010101010202020201010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, [myTiles.transparency16,sprites.dungeon.darkGroundNorthWest1,myTiles.tile1], TileScale.Sixteen))
+tiles.setTilemap(tilemap`level_0`)
 let mySprite = sprites.create(img`
-    . . . . . . . . 8 . . . . . . . 
-    . . . . . . . 8 8 8 . . . . . . 
-    . . . . . . . 8 f 8 . . . . . . 
-    . . . . . . . 8 f 8 . . . . . . 
-    . . . . . 8 8 f f f 8 8 . . . . 
-    . . . . 8 f f f f f f f 8 . . . 
-    . . . 8 f f f f f f f f f 8 . . 
-    . . . 8 f 6 6 6 6 6 6 6 f 8 . . 
-    . . 8 f f f f f 6 f f f f f 8 . 
-    . . 8 f f f f f 6 f f f f f 8 . 
-    . . 8 f f f f f 6 f f f f f 8 . 
-    . . . 8 f f f f 6 f f f f 8 . . 
-    . . . 8 f f f f 6 f f f f 8 . . 
-    . . . . 8 f f f 6 f f f 8 . . . 
-    . . . . . 8 8 f f f 8 8 . . . . 
-    . . . . . . . 8 8 8 . . . . . . 
+    . . . . . f f f f f f . . . . . 
+    . . . f f f f f f f f f f . . . 
+    . . . f f f e e e e f f f . . . 
+    . . f f e e e e e e e e f f . . 
+    . . f e e d f e e d f e e f . . 
+    . . f e e d f e e d f e e f . . 
+    . . f e e e e e e e e e e f . . 
+    . . f f e e f f f f e e f f . . 
+    . . f f f f d e e d f f f f . . 
+    . . . f d d d d d d d d f . . . 
+    . . . . b b b b b b b b . . . . 
+    . . b e e f f f e e e f f f f f 
+    . . b e e e e b b b b b b b . . 
+    . . b e e b b b b b b b b b . . 
+    . . b b b f f f f f f . . . . . 
+    . . . . . f f . . f f . . . . . 
     `, SpriteKind.Rotate)
 transformSprites.rotateSprite(mySprite, 0)
 let positiveRotation = 10
