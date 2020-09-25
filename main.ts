@@ -25,6 +25,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     bulletExists = true
 })
 info.onLifeZero(function () {
+    music.wawawawaa.play()
     game.showLongText("You Died!", DialogLayout.Bottom)
 })
 let goose: Sprite = null
@@ -212,6 +213,7 @@ forever(function () {
     }
     if (bedi.overlapsWith(goose)) {
         info.changeLifeBy(-1)
+        music.powerDown.play()
         goose.destroy()
         gooseExists = false
     }
